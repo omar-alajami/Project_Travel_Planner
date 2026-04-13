@@ -8,8 +8,8 @@ class Trip{
   //constructor. It throws an exception if you pass a string (name of destination) that does not exist in "destinations".
   Trip(String name, int numberOfPeople, int duration, int budget){
     if (!(Destination.contains(name))) throw Exception('DEST_NOT_FOUND');
-    if (numberOfPeople < 0) throw Exception('ERR_NEG_NMB_PPL');
-    if (duration < 0) throw Exception('ERR_NEG_DUR');
+    if (numberOfPeople <= 0) throw Exception('ERR_INV_NMB_PPL');
+    if (duration <= 0) throw Exception('ERR_INV_DUR');
     if (budget < 0 && budget != -1) throw Exception('ERR_NEG_BUD');
 
     this.dest = Destination.getDestination(name);
