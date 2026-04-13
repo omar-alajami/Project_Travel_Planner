@@ -83,7 +83,7 @@ class _ReturnedState extends State<Returned>{
             padding: EdgeInsets.only(bottom: 4),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
             child: TextField(
               keyboardType: TextInputType.numberWithOptions(),
-              decoration: InputDecoration(labelText: 'Enter buget (0 for minimum or keep empty to disregard)'),
+              decoration: InputDecoration(labelText: 'Enter buget (0 for minimum or 1 to disregard)'),
               onChanged: (gotBud){budget = parseBud(gotBud);},
             ),
           ),
@@ -127,10 +127,8 @@ class _ReturnedState extends State<Returned>{
   
 
   int parseBud(String a){
-    late int b;
-    if (a == '') {b = -1;}
-    else {b = int.tryParse(a) ?? -2;}
-
+    int b = int.tryParse(a) ?? -2;
+    if (b == 1) {b = -1;}
     return b;
   }
 }

@@ -1,3 +1,5 @@
+import 'CustExceptions.dart';
+
 class Trip{
   //datafields below
   late Destination dest;
@@ -7,10 +9,10 @@ class Trip{
 
   //constructor. It throws an exception if you pass a string (name of destination) that does not exist in "destinations".
   Trip(String name, int numberOfPeople, int duration, int budget){
-    if (!(Destination.contains(name))) throw Exception('DEST_NOT_FOUND');
-    if (numberOfPeople <= 0) throw Exception('ERR_INV_NMB_PPL');
-    if (duration <= 0) throw Exception('ERR_INV_DUR');
-    if (budget < 0 && budget != -1) throw Exception('ERR_NEG_BUD');
+    if (!(Destination.contains(name))) throw INV_DEST('Invalid destination. Either the destination does not exist in our database (there is no database) or the destination is written wrong.');
+    if (numberOfPeople <= 0) throw INV_NBPPL('Number of people must be greater than 0');
+    if (duration <= 0) throw INV_DUR('Duration must be greater than 0 days');
+    if (budget < 0 && budget != -1) throw INV_BUDG('Budget cannot be negative');
 
     this.dest = Destination.getDestination(name);
     this.numberOfPeople = numberOfPeople;
@@ -58,10 +60,13 @@ class Trip{
       return six + add;
     } else if (budget < calculateMinimumCost()){
       return none;
-    } else if (budget < calculateLevel1()) return two + add;
-    else if (budget < calculateLevel2()) return three + add;
-    else if (budget < calculateLevel3()) return four + add;
-    else return five + add;
+    } else if (budget < calculateLevel1()){
+      return two + add;
+    } else if (budget < calculateLevel2()){
+      return three + add;
+    } else if (budget < calculateLevel3()){
+      return four + add;
+    } else {return five + add;}
   }
     
 }
