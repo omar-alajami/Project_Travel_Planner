@@ -1,4 +1,4 @@
-import 'CustExceptions.dart';
+import 'custExceptions.dart';
 
 class Trip{
   //datafields below
@@ -52,7 +52,7 @@ class Trip{
     String five = 'Your budget of ${this.budget}USD for a trip to ${dest.name.toLowerCase()} is more than enough to allow you to stay at a good hotel, dine in a fancy restaurant, and experience the countries landmarks like ${dest.getLocString()}.';
     String six = 'To get the maximum out of a trip to ${dest.name.toLowerCase()} you would need about ${calculateLevel3()}USD, this will allow you to get the best airplane tickets, dine in a fancy restaurant, and experience the countries landmarks like ${dest.getLocString()}.';
 
-    String add = "\nThe country's official currency is ${dest.currency} at an exchange rate of ${dest.exchRate}${dest.currency}:1USD. So 100USD would get you ${100*dest.exchRate}${dest.currency}";
+    String add = "\n\nThe country's official currency is ${dest.currency} at an exchange rate of ${dest.exchRate}${dest.currency}:1USD. So 100USD would get you ${100*dest.exchRate}${dest.currency}";
 
     if (budget == 0) {
       return one + add;
