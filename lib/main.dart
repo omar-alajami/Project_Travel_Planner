@@ -10,21 +10,16 @@ class MainApp extends StatelessWidget {
 
   static const Color appbarBackgroundColor = Color.fromARGB(255, 70, 20, 140);
   static const Color scaffoldBackgroundColor = Color.fromARGB(255, 215, 190, 245);
-  static const Color appbarForegroundColor = Color.fromARGB(255, 120, 200, 250);
+  static const Color appbarForegroundColor = Color.fromARGB(255, 140, 205, 245);
   static const Color textColor = Color.fromARGB(255, 30, 25, 35);
 
   @override
   Widget build(BuildContext context) {
+    final ScreenWidth = MediaQuery.of(context).size.width;
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Century Gothic',
         appBarTheme: AppBarTheme(
-          titleTextStyle: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Century Gothic',
-            color: const Color.fromARGB(255, 190, 228, 252),
-          ),
           backgroundColor: appbarBackgroundColor,
           foregroundColor: appbarForegroundColor,
           centerTitle: true,
@@ -42,6 +37,10 @@ class MainApp extends StatelessWidget {
             fontWeight: FontWeight.normal,
             color: textColor, 
           ),
+          titleLarge: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          )
         ),
 
         textButtonTheme: TextButtonThemeData(
@@ -50,7 +49,8 @@ class MainApp extends StatelessWidget {
             foregroundColor: WidgetStateProperty.all(appbarForegroundColor),
             padding: WidgetStateProperty.all(EdgeInsets.symmetric(vertical: 12, horizontal: 20)),
             shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-            textStyle: WidgetStateProperty.all(TextStyle(fontSize: 16))
+            textStyle: WidgetStateProperty.all(TextStyle(fontSize: 16)),
+            fixedSize: WidgetStateProperty.all(Size(ScreenWidth*0.5, (ScreenWidth*0.5)/5)),//FIX THIS: These values were given at random, check and give the correct values.
           )
         )
       ),
@@ -85,56 +85,87 @@ class _ReturnedState extends State<Returned>{
   }
 
   Widget swinger(){
-    if (dest == '') return submitTrip();
-    else return result();
+    if (dest == '') {return submitTrip();}
+    else {return result();}
   }
 
   Widget submitTrip(){
+    final double space = 12;
+    final ScreenWidth = MediaQuery.of(context).size.width;
+    final widthFactor = 0.9;
     return Center(
       child: ListView (
-        padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+        padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
 
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 8, bottom: 12),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
-            child: TextField(
-              decoration: InputDecoration(labelText: 'Destination'),
-              onChanged: (gotDest){dest = gotDest;},
-              style: Theme.of(context).textTheme.bodySmall,
-            )
-          ),
-
-          Padding(
-            padding: EdgeInsets.only(bottom: 12),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
-            child: TextField(
-              keyboardType: TextInputType.numberWithOptions(),
-              decoration: InputDecoration(labelText: 'Number of People'),
-              onChanged: (gotNb){nbOfPeople = int.tryParse(gotNb) ?? 0;},
-              style: Theme.of(context).textTheme.bodySmall,
-            )
-          ),
-
-          Padding(
-            padding: EdgeInsets.only(bottom: 12),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
-            child: TextField(
-              keyboardType: TextInputType.numberWithOptions(),
-              decoration: InputDecoration(labelText: 'Duration'),
-              onChanged: (gotDur){duration = int.tryParse(gotDur) ?? 0;},
+            padding: EdgeInsets.only(bottom: space),
+            child: Text(
+              'Welcome to our "Travel Planner" app!\nPlease fill out the fields below then click "submit".\nThe unit for "Duration" is Days, and the unit for "Budget" is USD.',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
 
           Padding(
-            padding: EdgeInsets.only(bottom: 12),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
-            child: TextField(
-              keyboardType: TextInputType.numberWithOptions(),
-              decoration: InputDecoration(labelText: 'Enter buget (0 for minimum or 1 to disregard)'),
-              onChanged: (gotBud){budget = parseBud(gotBud);},
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
+            padding: EdgeInsets.only(bottom: space),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
+            child: Center(
+              child: SizedBox(
+                width: ScreenWidth*widthFactor,
+                child: TextField(
+                  decoration: InputDecoration(labelText: 'Destination'),
+                  onChanged: (gotDest){dest = gotDest;},
+                  style: Theme.of(context).textTheme.bodySmall,
+                )
+              )
+            )
           ),
 
-          TextButton(onPressed: (){setState((){});}, child: Text('SUBMIT'))
+          Padding(
+            padding: EdgeInsets.only(bottom: space),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
+            child: Center(
+              child: SizedBox(
+                width: ScreenWidth*widthFactor,
+                child: TextField(
+                  keyboardType: TextInputType.numberWithOptions(),
+                  decoration: InputDecoration(labelText: 'Number of People'),
+                  onChanged: (gotNb){nbOfPeople = int.tryParse(gotNb) ?? 0;},
+                  style: Theme.of(context).textTheme.bodySmall,
+                )
+              )
+            )
+          ),
+
+          Padding(
+            padding: EdgeInsets.only(bottom: space),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
+            child: Center(
+              child: SizedBox(
+                width: ScreenWidth * widthFactor,
+                child: TextField(
+                  keyboardType: TextInputType.numberWithOptions(),
+                  decoration: InputDecoration(labelText: 'Duration'),
+                  onChanged: (gotDur){duration = int.tryParse(gotDur) ?? 0;},
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              )
+            )
+          ),
+
+          Padding(
+            padding: EdgeInsets.only(bottom: space),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
+            child: Center(
+              child: SizedBox(
+                width: ScreenWidth*widthFactor,
+                child: TextField(
+                  keyboardType: TextInputType.numberWithOptions(),
+                  decoration: InputDecoration(labelText: 'Buget (0 for minimum or 00 to disregard)'),
+                  onChanged: (gotBud){budget = parseBud(gotBud);},
+                  style: Theme.of(context).textTheme.bodySmall,
+                )
+              ),
+            )
+          ),
+
+          Center(child: TextButton(onPressed: (){setState((){});}, child: Text('SUBMIT')))
         ]
       ),
     );
@@ -177,8 +208,9 @@ class _ReturnedState extends State<Returned>{
   
 
   int parseBud(String a){
-    int b = int.tryParse(a) ?? -2;
-    if (b == 1) {b = -1;}
-    return b;
+    a = a.trim();
+    if (a == '0') {return 0;}
+    else if (a == '00') {return -1;}
+    return int.tryParse(a) ?? -2;
   }
 }

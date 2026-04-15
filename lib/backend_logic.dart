@@ -90,11 +90,11 @@ class Destination{
     //'destinations' is supposed to have all destinations we create. You will never really use the "Destination" constructor alone, but do "addDestination(Destination(params))".
     static List<Destination> destinations = [
       Destination('UAE', 175, 400, 75, 180, 'AED', 3.67, 30, {'Burj Khalifa':60}),
-      Destination('TURKEY', 190, 420, 45, 120, 'TRY', 31, 15, {'Hagia Sophia':30}),
-      Destination('FRANCE', 300, 700, 65, 130, 'EUR', 0.9, 20, {'Eiffel Tower':25}),
-      Destination('GERMANY', 320, 750, 110, 200, 'EUR', 0.9, 40, {'Neuschwanstein Castle':40}),
-      Destination('EGYPT', 160, 380, 40, 90, 'EGP', 50, 10, {'Giza Pyramids':25}),
-      Destination('CYPRUS', 190, 450, 100, 190, 'EUR', 0.9, 35, {'Nissi Beach':5}),
+      Destination('TURKEY', 190, 420, 45, 120, 'TRY', 31, 15, {'The Hagia Sophia':30}),
+      Destination('FRANCE', 300, 700, 65, 130, 'EUR', 0.9, 20, {'The Eiffel Tower':25}),
+      Destination('GERMANY', 320, 750, 110, 200, 'EUR', 0.9, 40, {'The Neuschwanstein Castle':40}),
+      Destination('EGYPT', 160, 380, 40, 90, 'EGP', 50, 10, {'The Pyramids of Giza':25}),
+      Destination('ITALY', 290, 550, 65, 160, 'EUR', 0.9, 35, {'The Colosseum':50}),
     ];
 
     //constructor. There is no checking for any datafield, you can input whatever. We can later define currencies and only allow these currencies, make ticketPrice always positive, other bs.
