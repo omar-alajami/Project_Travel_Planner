@@ -8,14 +8,54 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
+  static const Color appbarBackgroundColor = Color.fromARGB(255, 70, 20, 140);
+  static const Color scaffoldBackgroundColor = Color.fromARGB(255, 215, 190, 245);
+  static const Color appbarForegroundColor = Color.fromARGB(255, 120, 200, 250);
+  static const Color textColor = Color.fromARGB(255, 30, 25, 35);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+          backgroundColor: appbarBackgroundColor,
+          foregroundColor: appbarForegroundColor,
+          centerTitle: true,
+        ),
+        scaffoldBackgroundColor: scaffoldBackgroundColor,
+
+        fontFamily: 'Century Gothic',
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: textColor,
+          ),
+          bodySmall: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.normal,
+            color: textColor, 
+          ),
+        ),
+
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(appbarBackgroundColor),
+            foregroundColor: WidgetStateProperty.all(appbarForegroundColor),
+            padding: WidgetStateProperty.all(EdgeInsets.symmetric(vertical: 12, horizontal: 20)),
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+            textStyle: WidgetStateProperty.all(TextStyle(fontSize: 16))
+          )
+        )
+      ),
       title: 'Planner_App',
       home: Scaffold(
         appBar: AppBar(
           title: Text('Travel Planner'),
-          centerTitle: true,
         ),
 
         body: Returned(),
@@ -58,6 +98,7 @@ class _ReturnedState extends State<Returned>{
             child: TextField(
               decoration: InputDecoration(labelText: 'Destination'),
               onChanged: (gotDest){dest = gotDest;},
+              style: Theme.of(context).textTheme.bodySmall,
             )
           ),
 
@@ -67,6 +108,7 @@ class _ReturnedState extends State<Returned>{
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(labelText: 'Number of People'),
               onChanged: (gotNb){nbOfPeople = int.tryParse(gotNb) ?? 0;},
+              style: Theme.of(context).textTheme.bodySmall,
             )
           ),
 
@@ -76,6 +118,7 @@ class _ReturnedState extends State<Returned>{
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(labelText: 'Duration'),
               onChanged: (gotDur){duration = int.tryParse(gotDur) ?? 0;},
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
 
@@ -85,6 +128,7 @@ class _ReturnedState extends State<Returned>{
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(labelText: 'Enter buget (0 for minimum or 1 to disregard)'),
               onChanged: (gotBud){budget = parseBud(gotBud);},
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
 
@@ -115,7 +159,7 @@ class _ReturnedState extends State<Returned>{
                   padding: EdgeInsets.fromLTRB(16, 8, 16, 4),
                   child: Text('IMG_HERE'),
                 ),
-                Text(shownString)
+                Text(shownString, style: Theme.of(context).textTheme.bodySmall)
               ],
             )
           ),
