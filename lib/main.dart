@@ -17,10 +17,13 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        fontFamily: 'Century Gothic',
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
+            fontFamily: 'Century Gothic',
+            color: const Color.fromARGB(255, 190, 228, 252),
           ),
           backgroundColor: appbarBackgroundColor,
           foregroundColor: appbarForegroundColor,
@@ -28,7 +31,6 @@ class MainApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: scaffoldBackgroundColor,
 
-        fontFamily: 'Century Gothic',
         textTheme: TextTheme(
           bodyLarge: TextStyle(
             fontSize: 18,
@@ -73,9 +75,9 @@ class Returned extends StatefulWidget{
 class _ReturnedState extends State<Returned>{
 
   String dest = '';
-  late int nbOfPeople;
-  late int duration;
-  late int budget;
+  int nbOfPeople = 0;
+  int duration = 0;
+  int budget = -2;
 
   @override
   Widget build(BuildContext context){
@@ -94,7 +96,7 @@ class _ReturnedState extends State<Returned>{
 
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 4),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
+            padding: EdgeInsets.only(top: 8, bottom: 12),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
             child: TextField(
               decoration: InputDecoration(labelText: 'Destination'),
               onChanged: (gotDest){dest = gotDest;},
@@ -103,7 +105,7 @@ class _ReturnedState extends State<Returned>{
           ),
 
           Padding(
-            padding: EdgeInsets.only(bottom: 4),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
+            padding: EdgeInsets.only(bottom: 12),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
             child: TextField(
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(labelText: 'Number of People'),
@@ -113,7 +115,7 @@ class _ReturnedState extends State<Returned>{
           ),
 
           Padding(
-            padding: EdgeInsets.only(bottom: 4),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
+            padding: EdgeInsets.only(bottom: 12),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
             child: TextField(
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(labelText: 'Duration'),
@@ -123,7 +125,7 @@ class _ReturnedState extends State<Returned>{
           ),
 
           Padding(
-            padding: EdgeInsets.only(bottom: 4),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
+            padding: EdgeInsets.only(bottom: 12),//I have no idea what the spaces are like, we can test the app and tweak the numbers and see which give the best look
             child: TextField(
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(labelText: 'Enter buget (0 for minimum or 1 to disregard)'),
@@ -156,14 +158,18 @@ class _ReturnedState extends State<Returned>{
               padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(16, 8, 16, 4),
+                  padding: EdgeInsets.only(top:8, bottom: 8),
                   child: Text('IMG_HERE'),
                 ),
-                Text(shownString, style: Theme.of(context).textTheme.bodySmall)
+
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8),
+                  child:Text(shownString, style: Theme.of(context).textTheme.bodySmall)
+                ),
               ],
             )
           ),
-          TextButton(onPressed: (){setState((){dest = '';});}, child: Text('CLOSE'))
+          TextButton(onPressed: (){setState((){dest = ''; nbOfPeople = 0; duration = 0; budget = -2;});}, child: Text('CLOSE'))
         ]
       )
     );
