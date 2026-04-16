@@ -83,9 +83,14 @@ class Destination{
     //locations belows. As in eiffel tower for 'france' and bs. maybe we won't use them, but just putting them in case we need them.
     Map<String, int>? locations;//String is the name of loc, int is price to get that loc. (entry fee (if any) + cost to get there + other idk) 
 
-    //For lamita
-    //if you have the time, you can add a Map<String, int> here which is "hotels" or "restaurants" or whatever you want, then in the "availability()" function, add a new String which says: "hotels in [country]: [list them] [add cost to each per night]", you can also add "you can afford to say here" if you want. To do that, compare the "cost of staying at this hotel per night + food cost" to "accomodationCostPerDayPerPerson[min/avg depending on where you're comparing]", if it's less then add "to stay here you would need to go over the budget", else add "you can stay here".
-
+    List<String> getImages(){
+      return [
+        'assets/images/${name.toLowerCase()}/${name.toLowerCase()}1.png',
+        'assets/images/${name.toLowerCase()}/${name.toLowerCase()}2.png',
+        'assets/images/${name.toLowerCase()}/${name.toLowerCase()}3.png',
+        'assets/images/${name.toLowerCase()}/${name.toLowerCase()}4.png',
+      ];
+    }
 
     //'destinations' is supposed to have all destinations we create. You will never really use the "Destination" constructor alone, but do "addDestination(Destination(params))".
     static List<Destination> destinations = [

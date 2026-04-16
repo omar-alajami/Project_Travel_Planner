@@ -172,14 +172,25 @@ class _ReturnedState extends State<Returned>{
   }
 
   Widget result(){
-
     String shownString = '';
+    final double space = 12;
+    bool error = false;
+    Trip? trip;
+    late Widget image1;
+    List<String>? images;
+
+
     try {
-      Trip trip = Trip(dest, nbOfPeople, duration, budget);
+      trip = Trip(dest, nbOfPeople, duration, budget);
       shownString = trip.availability();
     } catch (E){
       shownString = '$E';
+      error = true;
     }
+
+
+    if (error) {image1 = Image.asset('assets/images/error.png', fit: BoxFit.fitWidth);}
+    else {images = trip!.dest.getImages(); image1 = Image.asset(images[0], fit: BoxFit.fitWidth);}
 
     return Center(
       child: Column(
@@ -189,14 +200,42 @@ class _ReturnedState extends State<Returned>{
               padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top:8, bottom: 8),
-                  child: Text('IMG_HERE'),
+                  padding: EdgeInsets.only(bottom: space),
+                  child: SizedBox(
+                    width: (MediaQuery.of(context).size.width)*0.5,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: image1,
+                    ),
+                  )
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(bottom: 8),
-                  child:Text(shownString, style: Theme.of(context).textTheme.bodySmall)
+                  padding: EdgeInsets.only(bottom: space),
+                  child: Text(shownString, style: Theme.of(context).textTheme.bodySmall)
                 ),
+
+                if (!error) ...[
+                  Padding(
+                    padding: EdgeInsets.only(bottom: space*1.3, top:space),
+                    child: Text('${trip!.dest.name.toUpperCase()}:', style: Theme.of(context).textTheme.bodyLarge,)
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(bottom: space*0.5),
+                    child: Image.asset(images![1], fit: BoxFit.fitWidth)
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(bottom: space*0.5),
+                    child: Image.asset(images![2], fit: BoxFit.fitWidth)
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(bottom: space*0.5),
+                    child: Image.asset(images![3], fit: BoxFit.fitWidth)
+                  )
+                ]
               ],
             )
           ),
@@ -205,6 +244,7 @@ class _ReturnedState extends State<Returned>{
       )
     );
   }
+  
   
 
   int parseBud(String a){

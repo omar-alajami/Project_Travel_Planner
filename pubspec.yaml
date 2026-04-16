@@ -26,3 +26,12 @@ flutter:
 
         - asset: assets/fonts/gothicb.ttf
           weight: 700
+      
+  assets:
+    - assets/images/
+    - assets/images/italy/
+    - assets/images/france/
+    - assets/images/germany/
+    - assets/images/turkey/
+    - assets/images/egypt/
+    - assets/images/uae/
