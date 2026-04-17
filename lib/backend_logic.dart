@@ -9,6 +9,7 @@ class Trip{
 
   //constructor. It throws an exception if you pass a string (name of destination) that does not exist in "destinations".
   Trip(String name, int numberOfPeople, int duration, int budget){
+    name = name.trim();
     if (!(Destination.contains(name))) throw INV_DEST('Invalid destination. Either the destination does not exist in our database (there is no database) or the destination is written wrong.');
     if (numberOfPeople <= 0) throw INV_NBPPL('Number of people must be greater than 0');
     if (duration <= 0) throw INV_DUR('Duration must be greater than 0 days');

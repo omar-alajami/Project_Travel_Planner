@@ -200,14 +200,8 @@ class _ReturnedState extends State<Returned>{
               padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
               children: [
                 Padding(
-                  padding: EdgeInsets.only(bottom: space),
-                  child: SizedBox(
-                    width: (MediaQuery.of(context).size.width)*0.5,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: image1,
-                    ),
-                  )
+                  padding: EdgeInsets.only(bottom: space*1.5),
+                  child: image1,
                 ),
 
                 Padding(
